@@ -1,5 +1,7 @@
 import React from 'react'
-import { withRouter } from 'react-router-dom'
+import { Route, withRouter } from 'react-router-dom'
+
+import LandingPage from './LandingPage/View'
 
 class App extends React.Component {
 
@@ -7,7 +9,7 @@ class App extends React.Component {
     return (
       <main id="content">
         <div id="background">
-          <p>Hi</p>
+          <Route path='/' render={() => <LandingPage/>} />
         </div>
       </main>
 	  )
