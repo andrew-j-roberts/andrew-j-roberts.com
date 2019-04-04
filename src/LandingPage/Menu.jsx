@@ -1,15 +1,9 @@
 import React from 'react'
-import styled, {css} from 'styled-components'
-
-import AnimatedLogo from './AnimatedLogo'
+import styled from 'styled-components'
 
 const NavList = styled.div`
   display: grid;
-  grid-template-rows: repeat(3, auto);
-`
-
-const MenuHamburger = styled.button`
-
+  grid-template-rows: repeat(1, auto);
 `
 
 const MenuItem = styled.div`
@@ -20,7 +14,7 @@ const MenuItem = styled.div`
 
 const NavLink = styled(MenuItem)`
   & :hover {
-    color: #0d6790ff;
+    color: #0000EE;
     background-color: #dee2e6;
   }
 `
@@ -28,21 +22,9 @@ const NavLink = styled(MenuItem)`
 const Menu = props => {
   return (
     <NavList>
-        <NavLink>
-          projects
-        </NavLink >
-        <NavLink>
-          animations
-        </NavLink>
-        <NavLink>
-          résumé
-        </NavLink>
-        {/* <NavLink>
-          technical blog
-        </NavLink>
-        <NavLink>
-          personal blog
-        </NavLink> */}
+      <NavLink>
+        résumé
+      </NavLink>
     </NavList>
   )
 }

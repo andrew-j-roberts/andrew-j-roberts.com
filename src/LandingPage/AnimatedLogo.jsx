@@ -11,7 +11,7 @@ const BounceAnimation = keyframes`
 `
 
 const AnimatedLetter = styled.g`
-  animation: ${props => props.active && css`${BounceAnimation} 1s ease-in-out infinite;`};
+  animation: ${props => props.active && css`${BounceAnimation} 1.2s infinite;`};
   animation-delay: ${props => props.delay};
   animation-fill-mode: forwards;
 `
@@ -41,7 +41,7 @@ const Logo = props => {
       <g
         fontWeight={400}
         fontSize={24.694}
-        fontFamily="Meslo LG M for Powerline"
+        fontFamily="Source Code Pro"
         letterSpacing={0}
         wordSpacing={0}
         fill="#000"
@@ -52,7 +52,7 @@ const Logo = props => {
           <text
             style={{
               lineHeight: 1.25,
-              InkscapeFontSpecification: "'Meslo LG M for Powerline, Normal'",
+              InkscapeFontSpecification: "'Source Code Pro'",
               fontVariantLigatures: "normal",
               fontVariantCaps: "normal",
               fontVariantNumeric: "normal",
@@ -80,7 +80,7 @@ const Logo = props => {
             </tspan>
           </text>
         </AnimatedLetter>
-        <AnimatedLetter active={isHovered} delay={'0.25s'}>
+        <AnimatedLetter active={isHovered} delay={'0.24s'}>
           <text
           y={276.313}
           x={21.524}
@@ -112,7 +112,7 @@ const Logo = props => {
           </tspan>
         </text>
         </AnimatedLetter>
-        <AnimatedLetter active={isHovered} delay={'0.5s'}>
+        <AnimatedLetter active={isHovered} delay={'0.48s'}>
           <text
             style={{
               lineHeight: 1.25,
