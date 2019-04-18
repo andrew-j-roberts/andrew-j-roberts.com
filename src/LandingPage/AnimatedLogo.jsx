@@ -11,14 +11,14 @@ const BounceAnimation = keyframes`
 `
 
 const AnimatedLetter = styled.g`
-  animation: ${props => props.active && css`${BounceAnimation} 1.2s infinite;`};
+  animation: ${props => props.active && css`${BounceAnimation} 1.2s ease-in-out infinite;`};
   animation-delay: ${props => props.delay};
   animation-fill-mode: forwards;
 `
 
 const Logo = props => {
   var {isHovered, onMouseEnter, onMouseExit, ...rest} = props
-  return <div onMouseEnter={onMouseEnter} onMouseLeave={onMouseExit} style={{"display":"inline-table"}}>
+  return <div onMouseEnter={onMouseEnter} onMouseLeave={onMouseExit} style={{"cursor":"pointer", "display":"inline-table", "margin-bottom": "-4px"}}>
     <svg
     osb="http://www.openswatchbook.org/uri/2009/osb"
     viewBox="0 0 55 55"

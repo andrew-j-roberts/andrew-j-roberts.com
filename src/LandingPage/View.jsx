@@ -5,6 +5,7 @@ import styled from 'styled-components'
 import Header from './Header'
 import Menu from './Menu'
 import Resume from '../Resume/View'
+import SolacePage from '../SolacePage/View'
 
 const Flex = styled.div`
   display: flex;
@@ -31,45 +32,6 @@ const LeftSidebar = styled.div`
   }
 `
 
-const Toggle = styled.button`
-  position: fixed;
-  top: ${props => props.open ? '-25px' : '25px'};
-  left: ${props => props.open ? '-25px' : '25px'};
-  transition: all 0.5s;
-  transition-delay: 0.25s;
-`
-
-const ClosedMenuHamburger = props => (
-  <svg viewBox="0 0 55 55" {...props}>
-    <g transform="translate(0 -242)" fill="#d3d3d3">
-      <rect
-        width={34.018}
-        height={7.938}
-        x={10.491}
-        y={254.154}
-        ry={3.969}
-        opacity={0.95}
-      />
-      <rect
-        ry={3.969}
-        y={265.531}
-        x={10.491}
-        height={7.938}
-        width={34.018}
-        opacity={0.95}
-      />
-      <rect
-        width={34.018}
-        height={7.938}
-        x={10.491}
-        y={276.908}
-        ry={3.969}
-        opacity={0.95}
-      />
-    </g>
-  </svg>
-)
-
 const Content = styled.div`
   flex: auto;
   min-height: calc(100vh - 70px);
@@ -79,16 +41,17 @@ const Content = styled.div`
 `
 
 const LandingPage = props => {
-  const [isSideBarOpen, toggleSideBar] = useState(true)
+  const [isSideBarOpen, toggleSidebar] = useState(true)
   return (
     <>
-      <NavBar/>
+      <NavBar isOpen={isSideBarOpen} toggle={toggleSidebar}/>
       <Flex>
         <LeftSidebar open={isSideBarOpen}>
-          <Menu></Menu>
+          <Menu />
         </LeftSidebar>
         <Content open={isSideBarOpen}>
           <Route exact path='/resume' render={() => <Resume/>} />    
+          <Route exact path='/solace-demo' render={() => <SolacePage/>} />    
         </Content>
       </Flex>
     </>
