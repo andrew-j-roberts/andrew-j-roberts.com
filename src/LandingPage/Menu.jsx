@@ -29,7 +29,10 @@ const Menu = props => {
         resume
       </NavLink>
       <NavLink to="solace-demo">
-        solace demo
+        solace demo v1
+      </NavLink>
+      <NavLink to="solace-cluster">
+        solace demo v2
       </NavLink>
     </NavList>
   )

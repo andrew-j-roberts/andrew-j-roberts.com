@@ -6,6 +6,8 @@ import Header from './Header'
 import Menu from './Menu'
 import Resume from '../Resume/View'
 import SolacePage from '../SolacePage/View'
+import SolaceClusterPage from '../SolaceCluster/View'
+import FileManager from '../FileManager/View'
 
 const Flex = styled.div`
   display: flex;
@@ -51,7 +53,9 @@ const LandingPage = props => {
         </LeftSidebar>
         <Content open={isSideBarOpen}>
           <Route exact path='/resume' render={() => <Resume/>} />    
+          <Route exact path='/fs' render={() => <FileManager/>} />  
           <Route exact path='/solace-demo' render={() => <SolacePage/>} />    
+          <Route exact path='/solace-cluster' render={() => <SolaceClusterPage/>} />    
         </Content>
       </Flex>
     </>
