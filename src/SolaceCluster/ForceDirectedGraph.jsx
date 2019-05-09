@@ -1,20 +1,33 @@
-import React from 'react';
-import { InteractiveForceGraph, ForceGraphNode, ForceGraphLink } from 'react-vis-force';
+import React from "react";
+import { InteractiveForceGraph } from "react-vis-force";
 
-const ForceDirectedGraph = ({ height, width, nodes, list }) => {
-  console.log("FDG:", height, width)
+function ForceDirectedGraph({
+  height,
+  width,
+  nodes,
+  links,
+  selectedNode,
+  onSelectNode
+}) {
   return (
-      <InteractiveForceGraph
-        simulationOptions={{ height: height, width: width }}
-        labelAttr="label"
-        onSelectNode={(node) => console.log(node)}
-        highlightDependencies
-      >
-        <ForceGraphNode node={{ id: 'first-node', label: 'First node' }} fill="red" />
-        <ForceGraphNode node={{ id: 'second-node', label: 'Second node' }} fill="blue" />
-        <ForceGraphLink link={{ source: 'first-node', target: 'second-node' }} />
-      </InteractiveForceGraph>
-  )
+    <InteractiveForceGraph
+      highlightDependencies
+      simulationOptions={{ height: height, width: width }}
+      selectedNode={selectedNode}
+      onSelectNode={(event, node) => onSelectNode(node)}
+      onDeselectNode={(event, node) => {
+        onSelectNode(null);
+      }}
+      labelAttr="label"
+    >
+      {nodes.map((item, i) => {
+        return item;
+      })}
+      {links.map((item, i) => {
+        return item;
+      })}
+    </InteractiveForceGraph>
+  );
 }
 
-export default ForceDirectedGraph
+export default ForceDirectedGraph;

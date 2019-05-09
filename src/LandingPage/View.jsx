@@ -43,7 +43,7 @@ const Content = styled.div`
 `
 
 const LandingPage = props => {
-  const [isSideBarOpen, toggleSidebar] = useState(true)
+  const [isSideBarOpen, toggleSidebar] = useState(false)
   return (
     <>
       <NavBar isOpen={isSideBarOpen} toggle={toggleSidebar}/>
@@ -55,7 +55,7 @@ const LandingPage = props => {
           <Route exact path='/resume' render={() => <Resume/>} />    
           <Route exact path='/fs' render={() => <FileManager/>} />  
           <Route exact path='/solace-demo' render={() => <SolacePage/>} />    
-          <Route exact path='/solace-cluster' render={() => <SolaceClusterPage/>} />    
+          <Route path='/solace-cluster' render={() => <SolaceClusterPage/>} />    
         </Content>
       </Flex>
     </>
