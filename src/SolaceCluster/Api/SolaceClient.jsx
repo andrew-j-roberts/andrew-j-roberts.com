@@ -99,23 +99,21 @@ export function TopicPublisher(logger) {
     if (publisher.session !== null) {
       // sanitize / reduce message here
       var message = solace.createMessage();
-      message.setDestination(
-        solace.createTopicDestination(topicName)
-      );
+      message.setDestination(solace.createTopicDestination(topicName));
       message.setBinaryAttachment(messageText);
       message.setDeliveryMode(MessageDeliveryModeType.DIRECT);
       message.setSenderTimestamp(Date.now());
       publisher.log(
-        `Publisher ${publisher.session.getSessionProperties().url}: publishing message ${messageText} to topic ${
-          topicName
-        }...`
+        `Publisher ${
+          publisher.session.getSessionProperties().url
+        }: publishing message "${messageText}" to topic "${topicName}"...`
       );
       try {
         publisher.session.send(message);
         publisher.log(
-          `Publisher ${publisher.session.getSessionProperties().url}: successfully published ${messageText} to topic ${
-            topicName
-          }.`
+          `Publisher ${
+            publisher.session.getSessionProperties().url
+          }: successfully published "${messageText}" to topic "${topicName}"`
         );
       } catch (error) {
         publisher.log(error.toString());
@@ -159,11 +157,10 @@ export function TopicPublisher(logger) {
 
 /*jslint es6 node:true devel:true*/
 
-export function TopicSubscriber(topicName, logger) {
+export function TopicSubscriber(logger) {
   var solace = solaceModule;
   var subscriber = {};
   subscriber.session = null;
-  subscriber.topicName = topicName;
   subscriber.subscribed = false;
 
   // Logger
@@ -200,7 +197,6 @@ export function TopicSubscriber(topicName, logger) {
     // define session event listeners
     subscriber.session.on(SessionEventCode.UP_NOTICE, function(sessionEvent) {
       subscriber.log(`Subscriber connected to ${hostUrl}`);
-      subscriber.subscribe();
     });
     subscriber.session.on(SessionEventCode.CONNECT_FAILED_ERROR, function(
       sessionEvent
@@ -239,12 +235,15 @@ export function TopicSubscriber(topicName, logger) {
       } else {
         subscriber.subscribed = true;
         subscriber.log(
-          `Subscriber ${hostUrl}: successfully subscribed to topic "${sessionEvent.correlationKey}"`
+          `Subscriber ${hostUrl}: successfully subscribed to topic "${
+            sessionEvent.correlationKey
+          }"`
         );
       }
     });
     // define message event listener
     subscriber.session.on(SessionEventCode.MESSAGE, function(message) {
+      console.log(message);
       subscriber.log(
         `Subscriber ${hostUrl}: received message ${message.getBinaryAttachment()}`
       );
@@ -259,18 +258,18 @@ export function TopicSubscriber(topicName, logger) {
   };
 
   // Subscribes to topic on Solace message router
-  subscriber.subscribe = function() {
+  subscriber.subscribe = function(topicName) {
     if (subscriber.session !== null) {
       if (subscriber.subscribed) {
         subscriber.log(
-          `Subscriber ${hostUrl}: already subscribed to ${subscriber.topicName} and ready to receive messages.`
+          `Subscriber ${hostUrl}: already subscribed to a topic and ready to receive messages.`
         );
       } else {
         try {
           subscriber.session.subscribe(
-            solace.createTopicDestination(subscriber.topicName),
+            solace.createTopicDestination(topicName),
             true, // generate confirmation when subscription is added successfully
-            subscriber.topicName, // use topic name as correlation key
+            topicName, // use topic name as correlation key
             10000 // 10 seconds timeout for this operation
           );
         } catch (error) {
@@ -293,17 +292,15 @@ export function TopicSubscriber(topicName, logger) {
   };
 
   // Unsubscribes from topic on Solace message router
-  subscriber.unsubscribe = function() {
+  subscriber.unsubscribe = function(topicName) {
     if (subscriber.session !== null) {
       if (subscriber.subscribed) {
-        subscriber.log("Unsubscribing from topic: " + subscriber.topicName);
+        subscriber.log("Unsubscribing from topic: " + topicName);
         try {
           subscriber.session.unsubscribe(
-            solace.SolclientFactory.createTopicDestination(
-              subscriber.topicName
-            ),
+            solace.SolclientFactory.createTopicDestination(topicName),
             true, // generate confirmation when subscription is removed successfully
-            subscriber.topicName, // use topic name as correlation key
+            topicName, // use topic name as correlation key
             10000 // 10 seconds timeout for this operation
           );
         } catch (error) {
@@ -312,7 +309,7 @@ export function TopicSubscriber(topicName, logger) {
       } else {
         subscriber.log(
           'Cannot unsubscribe because not subscribed to the topic "' +
-            subscriber.topicName +
+            topicName +
             '"'
         );
       }
@@ -325,7 +322,11 @@ export function TopicSubscriber(topicName, logger) {
 
   // Gracefully disconnects from Solace message router
   subscriber.disconnect = function() {
-    subscriber.log("Disconnecting from Solace message router...");
+    subscriber.log(
+      `Subscriber ${
+        subscriber.session.getSessionProperties().url
+      }: disconnecting from Solace message router...`
+    );
     if (subscriber.session !== null) {
       try {
         subscriber.session.disconnect();

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { useInput } from "../Hooks/input-hook";
-import { X, DownArrow } from "../UI/Icons";
+import { X, Spinner, DownArrow } from "../UI/Icons";
 
 /**
  * Styles
@@ -78,7 +78,8 @@ export function FindMeshForm({
   defaultIpAddress,
   defaultUsername,
   defaultPassword,
-  submitHandler 
+  loadingMode,
+  submitHandler
 }) {
   const {
     value: ipAddress,
@@ -114,7 +115,10 @@ export function FindMeshForm({
         <Label>Password</Label>
         <Input type="password" {...bindPassword} />
       </FormGroup>
-      <Button type="submit">Submit</Button>
+      <Flex style={{"align-items": "center"}}>
+        <Button type="submit">Submit</Button>
+        {loadingMode == "loading" && (<Spinner/>)}
+      </Flex>
     </form>
   );
 }
@@ -124,8 +128,10 @@ export function RunCommandsForm({
   defaultPassword,
   connectPublishers,
   publishMessages,
+  disconnectPublishers,
   connectSubscribers,
-  subscribeToTopic
+  subscribeToTopic,
+  disconnectSubscribers
 }) {
   // UI
   const [publishOpen, setPublishOpen] = useState(true);
@@ -218,7 +224,7 @@ export function RunCommandsForm({
               <Button type="submit" style={{ "margin-right": "5px" }}>
                 Connect
               </Button>
-              <Button>Disconnect</Button>
+              <Button type="button" onClick={disconnectPublishers}>Disconnect</Button>
             </Flex>
           </FormGroup>
         </form>
@@ -269,7 +275,7 @@ export function RunCommandsForm({
               <Button type="submit" style={{ "margin-right": "5px" }}>
                 Connect
               </Button>
-              <Button>Disconnect</Button>
+              <Button type="button" onClick={disconnectSubscribers}>Disconnect</Button>
             </Flex>
           </FormGroup>
         </form>

@@ -11,6 +11,10 @@ import Server from './Server'
 import NetworkGraphIcon from './NetworkGraph'
 import Terminal from './Terminal'
 import ClearList from './ClearList'
+import PlusSign from './PlusSign'
+import MinusSign from './MinusSign'
+import Spinner from './Spinner'
+import Circle from './Circle'
 
 export {
   LeftArrow,
@@ -25,5 +29,9 @@ export {
   Server,
   Terminal,
   NetworkGraphIcon,
-  ClearList
+  ClearList,
+  PlusSign,
+  MinusSign,
+  Spinner,
+  Circle
 }
