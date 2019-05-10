@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useRef} from 'react'
 import styled from 'styled-components'
 import solace from 'solclientjs'
 import Publisher from './Publisher'
@@ -6,8 +6,9 @@ import Subscriber from './Subscriber'
 import AwsLogo from '../UI/Logos/AwsLogo'
 import GcpLogo from '../UI/Logos/GcpLogo'
 import Line from '../UI/Objects/Line'
-import MovingArrow from '../UI/Objects/MovingArrow';
+import MovingArrow from '../UI/Objects/MovingArrow'
 import resizeWindow from '../UI/Window/resizeWindow'
+import useResizeAware from '../UI/Objects/ResizeAware'
 
 // solace event brokers
 const eventBrokerAgent_aws_cloud = {
@@ -51,23 +52,29 @@ const FlexColumn = styled.div`
   justify-content: space-evenly;
 `
 const Content = styled.div`
+  position: relative;
   padding-top: ${props => props.paddingTop};
   padding-left: ${props => props.paddingLeft};
 `
 
 // Page
 const SolacePage = () => {  
-  const [publisherRef, setPublisherRef] = useState(null)
+  // state stuff
   const [isMessageSent, setMessageSent] = useState(null)
+  const [publisherRef, setPublisherRef] = useState(null)
   const [subscriberARef, setSubscriberARef] = useState(null)
   const [subscriberBRef, setSubscriberBRef] = useState(null)
+  // resizing
+  const [resizeListener, sizes] = useResizeAware()
   const window = resizeWindow()
-
+  // solace
   var factoryProps = new solace.SolclientFactoryProperties()
   factoryProps.profile = solace.SolclientFactoryProfiles.version10
   const solaceModule = solace.SolclientFactory.init(factoryProps)
+
   return (
     <Content paddingLeft={"25px"}>
+      {resizeListener}
       <Grid>
         <FlexRow>
           <FlexColumn>

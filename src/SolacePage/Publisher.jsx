@@ -27,13 +27,13 @@ const Publisher = ({ setMessageSent, solaceModule, eventBrokerAgent, topicName, 
   useEffect(() => {
     const topicPublisher = TopicPublisher(solaceModule, topicName)
     topicPublisher.run(
-      eventBrokerAgent.hostUrl,  //"http://104.155.86.62",
-      eventBrokerAgent.vpnName,  // default
-      eventBrokerAgent.userName, //"admin",
-      eventBrokerAgent.password  //"admin1234" // <-- secrets management goes here
+      eventBrokerAgent.hostUrl,  // "http://104.155.86.62",
+      eventBrokerAgent.vpnName,  //  default
+      eventBrokerAgent.userName, // "admin",
+      eventBrokerAgent.password  // "admin1234" <-- secrets management goes here
     )
     setPublisher(topicPublisher)
-    }, [solaceModule, eventBrokerAgent, topicName] // depends on only solaceModule and topicName)
+    }, [solaceModule, eventBrokerAgent, topicName] 
   )
 
   if(!publisher) {
