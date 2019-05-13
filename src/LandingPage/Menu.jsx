@@ -25,9 +25,9 @@ const NavLink = styled(Link)`
 const Menu = props => {
   return (
     <NavList>
-      <NavLink to="resume">
+      {/* <NavLink to="resume">
         resume
-      </NavLink>
+      </NavLink> */}
       <NavLink to="solace-demo">
         solace demo v1
       </NavLink>

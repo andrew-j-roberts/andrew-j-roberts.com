@@ -52,7 +52,7 @@ const LandingPage = props => {
           <Menu />
         </LeftSidebar>
         <Content open={isSideBarOpen}>
-          <Route exact path='/resume' render={() => <Resume/>} />    
+          {/* <Route exact path='/resume' render={() => <Resume/>} />     */}
           <Route exact path='/fs' render={() => <FileManager/>} />  
           <Route exact path='/solace-demo' render={() => <SolacePage/>} />    
           <Route path='/solace-cluster' render={() => <SolaceClusterPage/>} />    
