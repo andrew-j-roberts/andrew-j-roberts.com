@@ -1,0 +1,29 @@
+{
+  "name": "andrew-j-roberts.com",
+  "version": "1.0.0",
+  "description": "personal website",
+  "main": "index.js",
+  "scripts": {
+    "dev": "parcel index.html",
+    "build": "parcel build index.html"
+  },
+  "author": "Andrew Roberts",
+  "license": "ISC",
+  "dependencies": {
+    "core-js": "^3.1.4",
+    "prismjs": "^1.16.0",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-markdown": "^4.1.0",
+    "react-router-dom": "^5.0.1",
+    "react-spring": "^8.0.25",
+    "regenerator-runtime": "^0.13.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.4.5",
+    "@babel/preset-env": "^7.4.5",
+    "@babel/preset-react": "^7.0.0",
+    "babel-plugin-styled-components": "^1.10.1",
+    "styled-components": "^4.3.1"
+  }
+}
