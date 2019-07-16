@@ -1,14 +1,24 @@
 import React, { useState } from "react";
-import Header from "./Header";
-import { useWindowDimension } from "./components/Layout/useWindowDimension";
-import { Flex } from "./components/Layout";
+import styled from "styled-components";
+import { useWindowDimension } from "./components/layout/useWindowDimension";
+import { Flex } from "./components/layout";
 
-function Layout({ Header, Main, Sidebar, ...props }) {
+const MainContent = styled(Flex)`
+  background-color: #2a2a2e;
+  height: 100%;
+  min-height: calc(100vh - 60px);
+  width: 100%;
+`;
+
+function Layout({ Header, Main, MobileMenu, ...props }) {
   const { width, height } = useWindowDimension();
-  const { sidebarOpen, toggleSidebar } = useState(false);
+  const [menuOpen, toggleMenu] = useState(false);
 
   let screenSize;
   if (width > 900) {
+    if (menuOpen) {
+      toggleMenu(false);
+    }
     screenSize = "desktop";
   } else {
     screenSize = "mobile";
@@ -16,16 +26,20 @@ function Layout({ Header, Main, Sidebar, ...props }) {
 
   return (
     <>
-      <Header toggleSidebar={toggleSidebar} screenSize={screenSize} />
-      {sidebarOpen && screenSize == "mobile" ? (
-        <Flex>
-          <Sidebar open={sidebarOpen} screenSize={screenSize} />
-        </Flex>
+      <Header
+        toggleMenu={() => {
+          toggleMenu(!menuOpen);
+        }}
+        screenSize={screenSize}
+      />
+      {menuOpen && screenSize == "mobile" ? (
+        <MainContent>
+          <MobileMenu open={menuOpen} screenSize={screenSize} />
+        </MainContent>
       ) : (
-        <Flex>
-          <Sidebar open={sidebarOpen} screenSize={width} />
+        <MainContent>
           <Main screenSize={width} />
-        </Flex>
+        </MainContent>
       )}
     </>
   );

@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import Header from "./Header";
+import Header, { MobileMenu } from "./Header";
 import Layout from "./Layout";
 import { routes } from "./Routes";
 
@@ -17,7 +17,7 @@ function App() {
               {...props}
               Header={Header}
               Main={route.main}
-              Sidebar={route.sidebar}
+              MobileMenu={MobileMenu}
             />
           )}
         />

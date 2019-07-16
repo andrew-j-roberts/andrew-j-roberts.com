@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Flex } from "./Layout";
+import { Flex } from "./layout";
 import { SvgMagnifyingGlass } from "../../public/icons";
 
 /**
@@ -9,7 +9,8 @@ import { SvgMagnifyingGlass } from "../../public/icons";
 
 const SearchBarContainer = styled.div`
   align-items: center;
-  padding: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
 `;
 
 const SearchBarLayout = styled.div`
@@ -20,6 +21,9 @@ const SearchBarLayout = styled.div`
 
 const MagnifyingGlassIcon = styled(SvgMagnifyingGlass)`
   cursor: pointer;
+  &:hover {
+    filter: brightness(150%);
+  }
 `;
 
 const StyledInput = styled.input`

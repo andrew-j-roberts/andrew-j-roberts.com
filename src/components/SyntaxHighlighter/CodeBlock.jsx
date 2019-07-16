@@ -1,11 +1,6 @@
-import React, { useEffect } from "react";
-import Prism from "prismjs";
-import "./prism.css";
+import React from "react";
 
-function CodeBlock({ value, language = "" }) {
-  useEffect(() => {
-    Prism.highlightAll();
-  });
+function CodeBlock({ language = "", value }) {
   return (
     <pre>
       <code className={`${language}`}>{value}</code>

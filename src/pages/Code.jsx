@@ -1,6 +1,5 @@
 import React from "react";
-import Markdown from "react-markdown";
-import CodeBlock from "../components/SyntaxHighlighter/CodeBlock";
+import Article from "../components/Article";
 
 function Code() {
   const initialSource = `
@@ -27,16 +26,8 @@ function Code() {
   For instance, we could highlight \`const React = require('react')\` inline.
   See \`examples/custom-renderers\` for the code behind this.
   `;
-  return (
-    <Markdown
-      source={initialSource}
-      escapeHtml
-      renderers={{
-        CodeBlock: CodeBlock,
-        Code: CodeBlock
-      }}
-    />
-  );
+
+  return <Article rawMarkdown={initialSource} />;
 }
 
 export default Code;
